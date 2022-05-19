@@ -178,8 +178,6 @@ Takes _WS and FRAME as arguments."
       (org-id-get-create)
     (error nil))
   (setq org-id-prefix nil)
-  ;; TODO: Make the ignore tag configurable 
-  (org-set-tags (org-uniquify (cons "DO_NOT_ORG_ROAM" (org-get-tags))))
   (let* ((props (org-entry-properties))
          (json-null json-false)
          (js-date (get-js-date-pair )))
@@ -188,9 +186,7 @@ Takes _WS and FRAME as arguments."
     (push `(endDate . ,(cdr (assoc 'endDate js-date))) props)
     (push `(allDay . ,(cdr (assoc 'allDay js-date))) props)
     (push `(isReadOnly . ,org-hyperscheduler-readonly-mode) props)
-    props
-    )
-  )
+    props))
 
 (defun get-calendar-entries (scope)
   "Get all agenda entries using our filter and return a structure that is JSONable"
